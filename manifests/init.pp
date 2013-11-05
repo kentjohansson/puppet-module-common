@@ -72,6 +72,15 @@ class common (
   if str2bool($enable_puppet_agent) {
     include puppet::agent
   }
+  if str2bool($enable_rsyslog) {
+    include rsyslog
+  }
+  if str2bool($enable_selinux) {
+    include selinux
+  }
+  if str2bool($enable_ssh) {
+    include ssh
+  }
   if str2bool($enable_wget) {
     include wget
   }
@@ -80,15 +89,6 @@ class common (
   }
   if str2bool($enable_utils) {
     include utils
-  }
-  if str2bool($enable_ssh) {
-    include ssh
-  }
-  if str2bool($enable_selinux) {
-    include selinux
-  }
-  if str2bool($enable_rsyslog) {
-    include rsyslog
   }
 
   # only allow supported OS's
