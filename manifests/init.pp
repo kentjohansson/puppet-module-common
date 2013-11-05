@@ -39,237 +39,41 @@ class common (
   $enable_suse                      = false,
 ) {
 
-  # validate type and convert string to boolean if necessary
-  $enable_dnsclient_type = type($enable_dnsclient)
-  if $enable_dnsclient_type == 'string' {
-    $dnsclient_enabled = str2bool($enable_dnsclient)
-  } else {
-    $dnsclient_enabled = $enable_dnsclient
-  }
-  if $dnsclient_enabled == true {
-    include dnsclient
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_hosts_type = type($enable_hosts)
-  if $enable_hosts_type == 'string' {
-    $hosts_enabled = str2bool($enable_hosts)
-  } else {
-    $hosts_enabled = $enable_hosts
-  }
-  if $hosts_enabled == true {
-    include hosts
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_inittab_type = type($enable_inittab)
-  if $enable_inittab_type == 'string' {
-    $inittab_enabled = str2bool($enable_inittab)
-  } else {
-    $inittab_enabled = $enable_inittab
-  }
-  if $inittab_enabled == true {
-    include inittab
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_mailaliases_type = type($enable_mailaliases)
-  if $enable_mailaliases_type == 'string' {
-    $mailaliases_enabled = str2bool($enable_mailaliases)
-  } else {
-    $mailaliases_enabled = $enable_mailaliases
-  }
-  if $mailaliases_enabled == true {
-    include mailaliases
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_motd_type = type($enable_motd)
-  if $enable_motd_type == 'string' {
-    $motd_enabled = str2bool($enable_motd)
-  } else {
-    $motd_enabled = $enable_motd
-  }
-  if $motd_enabled == true {
-    include motd
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_network_type = type($enable_network)
-  if $enable_network_type == 'string' {
-    $network_enabled = str2bool($enable_network)
-  } else {
-    $network_enabled = $enable_network
-  }
-  if $network_enabled == true {
-    include network
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_nsswitch_type = type($enable_nsswitch)
-  if $enable_nsswitch_type == 'string' {
-    $nsswitch_enabled = str2bool($enable_nsswitch)
-  } else {
-    $nsswitch_enabled = $enable_nsswitch
-  }
-  if $nsswitch_enabled == true {
-    include nsswitch
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_ntp_type = type($enable_ntp)
-  if $enable_ntp_type == 'string' {
-    $ntp_enabled = str2bool($enable_ntp)
-  } else {
-    $ntp_enabled = $enable_ntp
-  }
-  if $ntp_enabled == true {
-    include ntp
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_pam_type = type($enable_pam)
-  if $enable_pam_type == 'string' {
-    $pam_enabled = str2bool($enable_pam)
-  } else {
-    $pam_enabled = $enable_pam
-  }
-  if $pam_enabled == true {
-    include pam
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_puppet_agent_type = type($enable_puppet_agent)
-  if $enable_puppet_agent_type == 'string' {
-    $puppet_agent_enabled = str2bool($enable_puppet_agent)
-  } else {
-    $puppet_agent_enabled = $enable_puppet_agent
-  }
-  if $puppet_agent_enabled == true {
-    include puppet::agent
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_rsyslog_type = type($enable_rsyslog)
-  if $enable_rsyslog_type == 'string' {
-    $rsyslog_enabled = str2bool($enable_rsyslog)
-  } else {
-    $rsyslog_enabled = $enable_rsyslog
-  }
-  if $rsyslog_enabled == true {
-    include rsyslog
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_selinux_type = type($enable_selinux)
-  if $enable_selinux_type == 'string' {
-    $selinux_enabled = str2bool($enable_selinux)
-  } else {
-    $selinux_enabled = $enable_selinux
-  }
-  if $selinux_enabled == true {
-    include selinux
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_ssh_type = type($enable_ssh)
-  if $enable_ssh_type == 'string' {
-    $ssh_enabled = str2bool($enable_ssh)
-  } else {
-    $ssh_enabled = $enable_ssh
-  }
-  if $ssh_enabled == true {
-    include ssh
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_utils_type = type($enable_utils)
-  if $enable_utils_type == 'string' {
-    $utils_enabled = str2bool($enable_utils)
-  } else {
-    $utils_enabled = $enable_utils
-  }
-  if $utils_enabled == true {
-    include utils
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_vim_type = type($enable_vim)
-  if $enable_vim_type == 'string' {
-    $vim_enabled = str2bool($enable_vim)
-  } else {
-    $vim_enabled = $enable_vim
-  }
-  if $vim_enabled == true {
-    include vim
-  }
-
-  # validate type and convert string to boolean if necessary
-  $enable_wget_type = type($enable_wget)
-  if $enable_wget_type == 'string' {
-    $wget_enabled = str2bool($enable_wget)
-  } else {
-    $wget_enabled = $enable_wget
-  }
-  if $wget_enabled == true {
-    include wget
-  }
+  common::module{ 'dnsclient': enable=>$enable_dnsclient }
+  common::module{ 'hosts': enable=>$enable_hosts }
+  common::module{ 'inittab': enable=>$enable_inittab }
+  common::module{ 'mailaliases': enable=>$enable_mailaliases }
+  common::module{ 'motd': enable=>$enable_motd }
+  common::module{ 'network': enable=>$enable_network }
+  common::module{ 'nsswitch': enable=>$enable_nsswitch }
+  common::module{ 'ntp': enable=>$enable_ntp }
+  common::module{ 'pam': enable=>$enable_pam }
+  common::module{ 'puppet::agent': enable=>$enable_puppet_agent }
+  common::module{ 'rsyslog': enable=>$enable_rsyslog }
+  common::module{ 'selinux': enable=>$enable_selinux }
+  common::module{ 'ssh': enable=>$enable_ssh }
+  common::module{ 'utils': enable=>$enable_utils }
+  common::module{ 'vim': enable=>$enable_vim }
+  common::module{ 'wget': enable=>$enable_wget }
 
   # only allow supported OS's
   case $::osfamily {
     'debian': {
-      # validate type and convert string to boolean if necessary
-      $enable_debian_type = type($enable_debian)
-      if $enable_debian_type == 'string' {
-        $debian_enabled = str2bool($enable_debian)
-      } else {
-        $debian_enabled = $enable_debian
-      }
-      if $debian_enabled == true {
-        include debian
-      }
+      common::module{ 'debian': enable=>$enable_debian }
     }
     'redhat': {
-      # validate type and convert string to boolean if necessary
-      $enable_redhat_type = type($enable_redhat)
-      if $enable_redhat_type == 'string' {
-        $redhat_enabled = str2bool($enable_redhat)
-      } else {
-        $redhat_enabled = $enable_redhat
-      }
-      if $redhat_enabled == true {
-        include redhat
-      }
+      common::module{ 'redhat': enable=>$enable_redhat }
     }
     'solaris': {
-      # validate type and convert string to boolean if necessary
-      $enable_solaris_type = type($enable_solaris)
-      if $enable_solaris_type == 'string' {
-        $solaris_enabled = str2bool($enable_solaris)
-      } else {
-        $solaris_enabled = $enable_solaris
-      }
-      if $solaris_enabled == true {
-        include solaris
-      }
+      common::module{ 'solaris': enable=>$enable_solaris }
     }
     'suse': {
-      # validate type and convert string to boolean if necessary
-      $enable_suse_type = type($enable_suse)
-      if $enable_suse_type == 'string' {
-        $suse_enabled = str2bool($enable_suse)
-      } else {
-        $suse_enabled = $enable_suse
-      }
-      if $suse_enabled == true {
-        include suse
-      }
+      common::module{ 'suse': enable=>$enable_suse }
     }
     default: {
       fail("Supported OS families are Debian, RedHat, Solaris, and Suse. Detected osfamily is ${::osfamily}.")
     }
   }
-
 
   # validate type and convert string to boolean if necessary
   $is_virtual_type = type($::is_virtual)
@@ -282,28 +86,10 @@ class common (
   # include modules depending on if we are virtual or not
   case $is_virtual {
     true: {
-      # validate type and convert string to boolean if necessary
-      $enable_virtual_type = type($enable_virtual)
-      if $enable_virtual_type == 'string' {
-        $virtual_enabled = str2bool($enable_virtual)
-      } else {
-        $virtual_enabled = $enable_virtual
-      }
-      if $virtual_enabled == true {
-        include virtual
-      }
+      common::module{ 'virtual': enable=>$enable_virtual }
     }
     false: {
-      # validate type and convert string to boolean if necessary
-      $enable_physical_type = type($enable_physical)
-      if $enable_physical_type == 'string' {
-        $physical_enabled = str2bool($enable_physical)
-      } else {
-        $physical_enabled = $enable_physical
-      }
-      if $physical_enabled == true {
-        include physical
-      }
+      common::module{ 'physical': enable=>$enable_physical }
     }
     default: {
       fail("is_virtual must be boolean true or false and is ${is_virtual}.")
